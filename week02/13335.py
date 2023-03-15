@@ -18,3 +18,4 @@ while bridge:
         else:
             bridge.append(0)
 print(time)
+## 이렇게 간단하게 풀다니...
