@@ -13,9 +13,6 @@ for _ in range(m):
     amounts[end].append((start, cost))
     indegree[start] += 1
 
-for i in amounts:
-    i.sort()
-
 
 def solution():
     q = deque()
