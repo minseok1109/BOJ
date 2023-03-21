@@ -26,16 +26,17 @@ def solution():
         now = q.popleft()
         for amount in amounts[now]:
             e, c = amount
+
             # 기본부품 더하기
-            if indegree[now] == 0:
-                if now in starts:
-                    tables[e][now] = c
-                else:
-                    for i in range(1, n + 1):
-                        tables[e][i] += tables[now][i] * c
-                indegree[e] -= 1
-                if indegree[e] == 0:
-                    q.append(e)
+            if now in starts:
+                tables[e][now] = c
+            # 중간부품 더하기
+            else:
+                for i in range(1, n + 1):
+                    tables[e][i] += tables[now][i] * c
+            indegree[e] -= 1
+            if indegree[e] == 0:
+                q.append(e)
 
 
 solution()
