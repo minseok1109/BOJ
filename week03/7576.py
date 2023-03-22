@@ -27,9 +27,8 @@ while rip:
         nx = x + dx[i]
         ny = y + dy[i]
         if isValide(nx, ny) and tomatos[nx][ny] == 0:
-            if not visited[nx][ny]:
-                tomatos[nx][ny] = tomatos[x][y] + 1
-                rip.append((nx, ny))
+            tomatos[nx][ny] = tomatos[x][y] + 1
+            rip.append((nx, ny))
 
 if 0 in sum(tomatos, []):
     print(-1)
