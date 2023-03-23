@@ -1,24 +1,34 @@
 import sys
-
+from collections import deque
 input = sys.stdin.readline
 
-n, m = map(int, input().rstrip().split())
+N, M = map(int, input().split())
 
-graph = [[sys.maxsize for _ in range(n + 1)] for _ in range(n + 1)]
+edges = {}
 
-for _ in range(m):
-    a, b = map(int, input().rstrip().split())
-    graph[a][b] = 1
-    graph[b][a] = 1
+for i in range(1,N+1):
+    edges[i] = []
 
-for k in range(1, n + 1):
-    for i in range(1, n + 1):
-        for j in range(1, n + 1):
-            if graph[i][k] and graph[k][j]:
-                if graph[i][j] > graph[i][k] + graph[k][j]:
-                    graph[i][j] = graph[i][k] + graph[k][j]
+for _ in range(M):
+    a, b = map(int, input().split())
+    edges[a].append(b)
+    edges[b].append(a)
 
-sum_list = [sys.maxsize]
-for i in range(1, n + 1):
-    sum_list.append(sum(graph[i][1:n + 1]))
-print(sum_list.index(min(sum_list)))
+def bfs(start):
+    visited = [False] * (N+1)
+    kevin = [0] * (N+1)
+    queue = deque([start])
+    while queue:
+        v = queue.popleft()
+        for w in edges[v]:
+            if not visited[w]:
+                visited[w] = True
+                kevin[w] = kevin[v] + 1
+                queue.append(w)
+    return sum(kevin)
+
+result = []
+for i in range(1,N+1):
+    result.append(bfs(i))
+
+print(result.index(min(result))+1)
