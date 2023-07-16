@@ -9,10 +9,12 @@ function factorize(number) {
   }
 
   let divisor = 3;
-  while (divisor * divisor <= number) {
+  let sqrt = Math.sqrt(number);
+  while (divisor <= sqrt) {
     if (number % divisor === 0) {
       factors.push(divisor);
       number /= divisor;
+      sqrt = Math.sqrt(number);
     } else {
       divisor += 2;
     }
@@ -26,4 +28,4 @@ function factorize(number) {
 }
 
 let answer = factorize(input);
-answer.map((item)=> console.log(item))
+answer.map((item) => console.log(item));
